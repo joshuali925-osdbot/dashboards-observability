@@ -458,6 +458,10 @@ describe('Panels testing with Sample Data', { defaultCommandTimeout: 10000 }, ()
       cy.get('[data-test-subj="searchAutocompleteTextArea"]')
         .invoke('val')
         .should('contain', 'Munich Airport');
+      // Blur and wait for React to re-render with updated pplFilterValue state
+      // before clicking Apply. Without this, onRefreshFilters reads stale state.
+      cy.get('[data-test-subj="searchAutocompleteTextArea"]').blur();
+      cy.wait(500);
       cy.get('button[data-test-subj="superDatePickerApplyTimeButton"]').click({ force: true });
       cy.get('.xtick', { timeout: 40000 }).should('contain', 'Munich Airport');
       cy.get('.xtick').contains('Zurich Airport').should('not.exist');
