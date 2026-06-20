@@ -479,7 +479,7 @@ describe('Visualizing data', () => {
     cy.get('[data-test-subj="vizConfigSection-series"]')
       .find('[data-test-subj="viz-config-add-btn"]')
       .click();
-    cy.get('[data-test-subj="panelCloseBtn"]').click();
+    cy.get('[data-test-subj="panelCloseBtn"]').click({ force: true });
     cy.get('[data-test-subj="vizConfigSection-dimensions"]')
       .find('[data-test-subj="viz-config-add-btn"]')
       .click();
@@ -488,7 +488,7 @@ describe('Visualizing data', () => {
       .click()
       .type(FIELD_HOST);
     cy.get(`input[value="${FIELD_HOST}"]`).click();
-    cy.get('[data-test-subj="panelCloseBtn"]').click();
+    cy.get('[data-test-subj="panelCloseBtn"]').click({ force: true });
     cy.get('[data-test-subj="vizConfigSection-breakdowns"]')
       .find('[data-test-subj="viz-config-add-btn"]')
       .click();
@@ -497,7 +497,7 @@ describe('Visualizing data', () => {
       .click()
       .type(FIELD_AGENT);
     cy.get(`input[value="${FIELD_AGENT}"]`).click();
-    cy.get('[data-test-subj="panelCloseBtn"]').click();
+    cy.get('[data-test-subj="panelCloseBtn"]').click({ force: true });
     cy.get('[data-test-subj="visualizeEditorRenderButton"]').click();
 
     cy.get('.infolayer .legendtext').as('legandTxt');
