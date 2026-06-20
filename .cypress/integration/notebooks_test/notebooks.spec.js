@@ -280,8 +280,8 @@ describe('Testing paragraphs', () => {
   });
 
   it('Renders very long query as wrapped', () => {
-    cy.get('button[data-test-subj="AddParagraphButton"]').click();
-    cy.get('button[data-test-subj="AddCodeBlockBtn"]').click();
+    cy.get('button[data-test-subj="AddParagraphButton"]').scrollIntoView().click();
+    cy.get('button[data-test-subj="AddCodeBlockBtn"]').click({ force: true });
 
     const testWord = 'randomText' + uuid4().replace(/-/gi, '').repeat(10);
     cy.get('textarea[data-test-subj="editorArea-5"]').clear();
@@ -301,8 +301,8 @@ describe('Testing paragraphs', () => {
   });
 
   it('Adds an incorrect SQL query paragraph', () => {
-    cy.get('button[data-test-subj="AddParagraphButton"]').click();
-    cy.get('button[data-test-subj="AddCodeBlockBtn"]').click();
+    cy.get('button[data-test-subj="AddParagraphButton"]').scrollIntoView().click();
+    cy.get('button[data-test-subj="AddCodeBlockBtn"]').click({ force: true });
 
     cy.get('textarea[data-test-subj="editorArea-6"]').clear();
     cy.get('textarea[data-test-subj="editorArea-6"]').focus();
@@ -340,8 +340,8 @@ describe('Testing paragraphs', () => {
   });
 
   it('Adds a PPL query paragraph', () => {
-    cy.get('button[data-test-subj="AddParagraphButton"]').click();
-    cy.get('button[data-test-subj="AddCodeBlockBtn"]').click();
+    cy.get('button[data-test-subj="AddParagraphButton"]').scrollIntoView().click();
+    cy.get('button[data-test-subj="AddCodeBlockBtn"]').click({ force: true });
 
     cy.get('textarea[data-test-subj="editorArea-8"]').clear();
     cy.get('textarea[data-test-subj="editorArea-8"]').focus();
@@ -357,8 +357,8 @@ describe('Testing paragraphs', () => {
   });
 
   it('Adds an incorrect PPL query paragraph', () => {
-    cy.get('button[data-test-subj="AddParagraphButton"]').click();
-    cy.get('button[data-test-subj="AddCodeBlockBtn"]').click();
+    cy.get('button[data-test-subj="AddParagraphButton"]').scrollIntoView().click();
+    cy.get('button[data-test-subj="AddCodeBlockBtn"]').click({ force: true });
 
     cy.get('textarea[data-test-subj="editorArea-9"]').clear();
     cy.get('textarea[data-test-subj="editorArea-9"]').focus();
@@ -434,7 +434,7 @@ describe('Testing paragraphs', () => {
     cy.get('[data-test-subj="globalLoadingIndicator"]', { timeout: 30000 }).should('not.exist');
 
     // Scroll to top to ensure first paragraph menu button is in view
-    cy.scrollTo('top');
+    cy.scrollTo('top', { ensureScrollable: false });
     cy.get('.euiButtonIcon[aria-label="Open paragraph menu"').eq(0).scrollIntoView({ duration: 500 });
     cy.get('.euiButtonIcon[aria-label="Open paragraph menu"').eq(0).click();
     cy.get('.euiContextMenuItem-isDisabled').should('have.length.gte', 2);
