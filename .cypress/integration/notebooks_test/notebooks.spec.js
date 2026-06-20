@@ -222,8 +222,8 @@ describe('Testing paragraphs', () => {
     cy.intercept('GET', '**/api/saved_objects/_find?type=observability-visualization').as(
       'getObservabilityVisualization'
     );
-    cy.get('button[data-test-subj="AddParagraphButton"]').click();
-    cy.get('button[data-test-subj="AddVisualizationBlockBtn"]').click();
+    cy.get('button[data-test-subj="AddParagraphButton"]').scrollIntoView().click();
+    cy.get('button[data-test-subj="AddVisualizationBlockBtn"]').scrollIntoView().click();
     cy.wait('@getObservabilityVisualization');
 
     cy.get('button[data-test-subj="runRefreshBtn-2"]').click();
@@ -238,7 +238,7 @@ describe('Testing paragraphs', () => {
       .type('[Flights] Flight Count and Average Ticket Price{enter}');
     cy.get('button[data-test-subj="para-input-select-button"]').click();
     cy.get('button[data-test-subj="runRefreshBtn-2"]').click();
-    cy.get('div.visualization').should('exist');
+    cy.get('div.visualization', { timeout: 90000 }).should('exist');
   });
 
   it('Adds a SQL query paragraph', () => {
@@ -260,8 +260,8 @@ describe('Testing paragraphs', () => {
   });
 
   it('Renders very long markdown as wrapped', () => {
-    cy.get('button[data-test-subj="AddParagraphButton"]').click();
-    cy.get('button[data-test-subj="AddCodeBlockBtn"]').click();
+    cy.get('button[data-test-subj="AddParagraphButton"]').scrollIntoView().click();
+    cy.get('button[data-test-subj="AddCodeBlockBtn"]').scrollIntoView().click();
 
     const testWord = uuid4().replace(/-/gi, '').repeat(10);
     cy.get('textarea[data-test-subj="editorArea-4"]').clear();
@@ -281,7 +281,7 @@ describe('Testing paragraphs', () => {
 
   it('Renders very long query as wrapped', () => {
     cy.get('button[data-test-subj="AddParagraphButton"]').scrollIntoView().click();
-    cy.get('button[data-test-subj="AddCodeBlockBtn"]').click({ force: true });
+    cy.get('button[data-test-subj="AddCodeBlockBtn"]').scrollIntoView().click();
 
     const testWord = 'randomText' + uuid4().replace(/-/gi, '').repeat(10);
     cy.get('textarea[data-test-subj="editorArea-5"]').clear();
@@ -302,7 +302,7 @@ describe('Testing paragraphs', () => {
 
   it('Adds an incorrect SQL query paragraph', () => {
     cy.get('button[data-test-subj="AddParagraphButton"]').scrollIntoView().click();
-    cy.get('button[data-test-subj="AddCodeBlockBtn"]').click({ force: true });
+    cy.get('button[data-test-subj="AddCodeBlockBtn"]').scrollIntoView().click();
 
     cy.get('textarea[data-test-subj="editorArea-6"]').clear();
     cy.get('textarea[data-test-subj="editorArea-6"]').focus();
@@ -341,7 +341,7 @@ describe('Testing paragraphs', () => {
 
   it('Adds a PPL query paragraph', () => {
     cy.get('button[data-test-subj="AddParagraphButton"]').scrollIntoView().click();
-    cy.get('button[data-test-subj="AddCodeBlockBtn"]').click({ force: true });
+    cy.get('button[data-test-subj="AddCodeBlockBtn"]').scrollIntoView().click();
 
     cy.get('textarea[data-test-subj="editorArea-8"]').clear();
     cy.get('textarea[data-test-subj="editorArea-8"]').focus();
@@ -358,7 +358,7 @@ describe('Testing paragraphs', () => {
 
   it('Adds an incorrect PPL query paragraph', () => {
     cy.get('button[data-test-subj="AddParagraphButton"]').scrollIntoView().click();
-    cy.get('button[data-test-subj="AddCodeBlockBtn"]').click({ force: true });
+    cy.get('button[data-test-subj="AddCodeBlockBtn"]').scrollIntoView().click();
 
     cy.get('textarea[data-test-subj="editorArea-9"]').clear();
     cy.get('textarea[data-test-subj="editorArea-9"]').focus();

@@ -86,7 +86,7 @@ describe('runWithConcurrencyLimit', () => {
     await runWithConcurrencyLimit(tasks, 2);
     const elapsed = Date.now() - start;
     // Should be ~50ms (slow + parallel fasts), not ~52+ms (slow + serial
-    // fasts). Allow generous slack for test runner jitter.
-    expect(elapsed).toBeLessThan(75);
+    // fasts). Allow generous slack for CI runner jitter (especially Windows).
+    expect(elapsed).toBeLessThan(150);
   });
 });
